@@ -1,9 +1,11 @@
-// ignore_for_file: avoid_print, deprecated_member_use
+// ignore_for_file: avoid_print, deprecated_member_use, use_super_parameters, prefer_final_fields
 
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram1/resources/auth_methods.dart';
 import 'package:instagram1/screens/login_screen.dart';
 import 'package:instagram1/utils/colors.dart';
 import 'package:instagram1/utils/utils.dart';
@@ -23,8 +25,9 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _bioController = TextEditingController();
   bool _isLoading = false;
   Uint8List? _image;
-
+  
   @override
+
   void dispose() {
     super.dispose();
     _emailController.dispose();
@@ -164,7 +167,15 @@ class _SignupScreenState extends State<SignupScreen> {
                 height: 24,
               ),
               InkWell(
-                onTap: signUpUser,
+                onTap: () async{
+                  String res = await AuthMethods().signUpUser(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                    username: _usernameController.text,
+                    bio: _bioController.text,
+                  );
+                  print("res is $res");
+                },
                 child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
@@ -209,7 +220,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: const Text(
-                        ' Login.',
+                        'Login.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
