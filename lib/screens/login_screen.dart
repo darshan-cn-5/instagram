@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:instagram1/resources/auth_methods.dart';
+import 'package:instagram1/responsive/mobile_screen_layout.dart';
+import 'package:instagram1/responsive/responsive_layout.dart';
+import 'package:instagram1/responsive/web_screen_layout.dart';
 import 'package:instagram1/screens/signup_screen.dart';
 import 'package:instagram1/utils/colors.dart';
 import 'package:instagram1/utils/dimensions.dart';
+import 'package:instagram1/utils/utils.dart';
 import 'package:instagram1/widgets/text_field_input.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,40 +29,37 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordController.dispose();
   }
 
-  // void loginUser() async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-  //   String res = await AuthMethods().loginUser(
-  //       email: _emailController.text, password: _passwordController.text);
-  //   if (res == 'success') {
-  //     if (context.mounted) {
-  //       Navigator.of(context).pushAndRemoveUntil(
-  //           MaterialPageRoute(
-  //             builder: (context) => const ResponsiveLayout(
-  //               mobileScreenLayout: MobileScreenLayout(),
-  //               webScreenLayout: WebScreenLayout(),
-  //             ),
-  //           ),
-  //           (route) => false);
+  void loginUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethods().loginUser(
+        email: _emailController.text, password: _passwordController.text);
+    if (res == 'success') {
+      if (context.mounted) {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => const ResponsiveLayout(
+                mobileScreenLayout: MobileScreenLayout(),
+                webScreenLayout: WebScreenLayout(),
+              ),
+            ),
+            (route) => false);
 
-  //       setState(() {
-  //         _isLoading = false;
-  //       });
-  //     }
-  //   } else {
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //     if (context.mounted) {
-  //       showSnackBar(context, res);
-  //     }
-  //   }
-  // }
-
-  void loginUser() async{
-    return null;
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      if (context.mounted) {
+        showSnackBar(context, res);
+      }
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {

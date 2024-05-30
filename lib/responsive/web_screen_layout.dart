@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class WebScreenLayput extends StatefulWidget {
-  const WebScreenLayput({super.key});
+class WebScreenLayout extends StatefulWidget {
+  const WebScreenLayout({super.key});
 
   @override
-  State<WebScreenLayput> createState() => _WebScreenLayputState();
+  State<WebScreenLayout> createState() => _WebScreenLayoutState();
 }
 
-class _WebScreenLayputState extends State<WebScreenLayput> {
+class _WebScreenLayoutState extends State<WebScreenLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('WebScreenLayput'),
+        child: Text('WebScreenLayout'),
       ),
     );
   }

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, deprecated_member_use, use_super_parameters, prefer_final_fields
+// ignore_for_file: avoid_print, deprecated_member_use, use_super_parameters, prefer_final_fields, unused_import
 
 import 'dart:io';
 import 'dart:typed_data';
@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram1/resources/auth_methods.dart';
+import 'package:instagram1/responsive/mobile_screen_layout.dart';
+import 'package:instagram1/responsive/responsive_layout.dart';
+import 'package:instagram1/responsive/web_screen_layout.dart';
 import 'package:instagram1/screens/login_screen.dart';
 import 'package:instagram1/utils/colors.dart';
 import 'package:instagram1/utils/utils.dart';
@@ -25,9 +28,8 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _bioController = TextEditingController();
   bool _isLoading = false;
   Uint8List? _image;
-  
-  @override
 
+  @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
@@ -35,45 +37,55 @@ class _SignupScreenState extends State<SignupScreen> {
     _usernameController.dispose();
   }
 
-  // void signUpUser() async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-  //   String res = await AuthMethods().signUpUser(
-  //       email: _emailController.text,
-  //       password: _passwordController.text,
-  //       username: _usernameController.text,
-  //       bio: _bioController.text,
-  //       file: _image!,
-  //       pasword: _passwordController.text);
-  //       print("res is $res");
-  //   if (res == "success"){
-  //     setState((){
-  //       _isLoading = false;
-  //     });
-
-  //     if (context.mounted) {
-  //       Navigator.of(context).pushReplacement(
-  //         MaterialPageRoute(
-  //           builder: (context) => const ResponsiveLayout(
-  //             mobileScreenLayout: MobileScreenLayout(),
-  //             webScreenLayout: WebScreenLayout(),
-  //           ),
-  //         ),
-  //       );
-  //     }
-  //   } else {
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //     if (context.mounted) {
-  //       showSnackBar(context, res);
-  //     }
-  //   }
-  // }
-
   void signUpUser() async {
-    return null;
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethods().signUpUser(
+      email: _emailController.text,
+      password: _passwordController.text,
+      username: _usernameController.text,
+      bio: _bioController.text,
+      file: _image!,
+    );
+    print("res is $res");
+    if (res == "success") {
+      setState(() {
+        _isLoading = false;
+      });
+
+      if (context.mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const ResponsiveLayout(
+              mobileScreenLayout: MobileScreenLayout(),
+              webScreenLayout: WebScreenLayout(),
+            ),
+          ),
+        );
+      }
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      if (context.mounted) {
+        showSnackBar(context, res);
+      }
+    }
+  }
+
+  void signupUser() async {
+    String res = await AuthMethods().signUpUser(
+        email: _emailController.text,
+        password: _passwordController.text,
+        username: _usernameController.text,
+        bio: _bioController.text,
+        file: _image!);
+    if (res == "success") {
+      print("result is success and moving to the next page");
+    } else {
+      print("error occured and res is $res");
+    }
   }
 
   selectImage() async {
@@ -167,14 +179,15 @@ class _SignupScreenState extends State<SignupScreen> {
                 height: 24,
               ),
               InkWell(
-                onTap: () async{
-                  String res = await AuthMethods().signUpUser(
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                    username: _usernameController.text,
-                    bio: _bioController.text,
-                  );
-                  print("res is $res");
+                onTap: () async {
+                  // String res = await AuthMethods().signUpUser(
+                  //   email: _emailController.text,
+                  //   password: _passwordController.text,
+                  //   username: _usernameController.text,
+                  //   bio: _bioController.text,
+                  // );
+                  // print("res is $res");
+                  signUpUser();
                 },
                 child: Container(
                   width: double.infinity,
