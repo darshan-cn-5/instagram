@@ -5,7 +5,6 @@ import 'package:instagram1/providers/user_provider.dart';
 import 'package:instagram1/utils/dimensions.dart';
 import 'package:provider/provider.dart';
 
-
 class ResponsiveLayout extends StatefulWidget{
   final Widget webScreenLayout;
   final Widget mobileScreenLayout;
@@ -21,11 +20,8 @@ class ResponsiveLayout extends StatefulWidget{
 }
 
 class _ResponsiveLayoutState extends State<ResponsiveLayout> {
-  
-
   @override
-
- void initState() {
+  void initState(){
     super.initState();
     addData() async {
     UserProvider userProvider =

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, deprecated_member_use, use_super_parameters, prefer_final_fields, unused_import
+// ignore_for_file: avoid_print, deprecated_member_use, use_super_parameters, prefer_final_fields, unused_import, use_build_context_synchronously
 
 import 'dart:io';
 import 'dart:typed_data';
@@ -54,7 +54,7 @@ class _SignupScreenState extends State<SignupScreen> {
         _isLoading = false;
       });
 
-      if (context.mounted) {
+      if (context.mounted){
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) => const ResponsiveLayout(

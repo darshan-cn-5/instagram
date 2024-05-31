@@ -1,24 +1,23 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, use_super_parameters, prefer_const_constructors, avoid_print
 
-import "dart:typed_data";
+import 'dart:typed_data';
 
-import "package:flutter/material.dart";
-import "package:image_picker/image_picker.dart";
-import "package:instagram1/providers/user_provider.dart";
-import "package:instagram1/resources/firestore_methods.dart";
-import "package:instagram1/utils/colors.dart";
-import "package:instagram1/utils/utils.dart";
-import "package:provider/provider.dart";
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:instagram1/providers/user_provider.dart';
+import 'package:instagram1/resources/firestore_methods.dart';
+import 'package:instagram1/utils/colors.dart';
+import 'package:instagram1/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class AddPostScreen extends StatefulWidget {
-  const AddPostScreen({super.key});
-
+  const AddPostScreen({Key? key}) : super(key: key);
   @override
-  State<AddPostScreen> createState() => _AddPostScreenState();
+  _AddPostScreenState createState() => _AddPostScreenState();
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
- Uint8List? _file;
+  Uint8List? _file;
   bool isLoading = false;
   final TextEditingController _descriptionController = TextEditingController();
 
@@ -66,9 +65,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
     setState(() {
       isLoading = true;
     });
-    // start the loading
     try {
-      // upload to storage and db
       String res = await FireStoreMethods().uploadPost(
         _descriptionController.text,
         _file!,
@@ -118,7 +115,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   @override
   Widget build(BuildContext context) {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
-
+    // print("user profile photo link is ${userProvider.getUser.photoUrl}");
     return _file == null
         ? Center(
             child: IconButton(
@@ -168,10 +165,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        userProvider.getUser.photoUrl,
-                      ),
-                    ),
+                        // backgroundImage: NetworkImage(
+                        //   userProvider.getUser.photoUrl,
+                        // ),
+                        ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.3,
                       child: TextField(
