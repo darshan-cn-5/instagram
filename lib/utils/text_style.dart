@@ -19,3 +19,23 @@ TextStyle whiteTextStyle = TextStyle(
   fontSize: 22.0,
   fontWeight: FontWeight.w700,
 );
+
+TextStyle whiteHeadingTextStyle = TextStyle(
+  color: Colors.white,
+  fontWeight: FontWeight.w700,
+  fontSize: 26.0,
+);
+
+
+TextStyle blueTextStyle = TextStyle(
+  color: Colors.blue,
+  fontSize: 22.0,
+  fontWeight: FontWeight.w700,
+);
+
+
+TextStyle blueHeadingTextStyle = TextStyle(
+  color: Colors.blue,
+  fontWeight: FontWeight.w700,
+  fontSize: 26.0,
+);
