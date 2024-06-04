@@ -16,7 +16,6 @@ import 'package:instagram1/widgets/text_field_input.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
-
   @override
   State<SignupScreen> createState() => _SignupScreenState();
 }
@@ -30,15 +29,17 @@ class _SignupScreenState extends State<SignupScreen> {
   Uint8List? _image;
 
   @override
-  void dispose() {
+  
+  void dispose(){
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _bioController.dispose();
     _usernameController.dispose();
   }
 
-  void signUpUser() async {
-    setState(() {
+  void signUpUser() async{
+    setState((){
       _isLoading = true;
     });
     String res = await AuthMethods().signUpUser(
@@ -54,7 +55,7 @@ class _SignupScreenState extends State<SignupScreen> {
         _isLoading = false;
       });
 
-      if (context.mounted){
+      if (context.mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) => const ResponsiveLayout(

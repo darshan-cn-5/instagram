@@ -11,10 +11,9 @@ import 'package:instagram1/utils/utils.dart';
 import 'package:instagram1/widgets/like_animation.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
 import '../providers/user_provider.dart';
 
-class PostCard extends StatefulWidget {
+class PostCard extends StatefulWidget{
   final snap;
   const PostCard({
     Key? key,
@@ -81,7 +80,6 @@ class _PostCardState extends State<PostCard> {
       ),
       child: Column(
         children: [
-          // HEADER SECTION OF THE POST
           Container(
             padding: const EdgeInsets.symmetric(
               vertical: 4,
