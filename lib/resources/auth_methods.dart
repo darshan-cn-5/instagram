@@ -15,8 +15,12 @@ class AuthMethods {
 
   Future<model.User> getUserDetails() async {
     User currentUser = _auth.currentUser!;
+    print("came inside the function also to get the user details");
     DocumentSnapshot documentSnapshot =
         await _firestore.collection('users').doc(currentUser.uid).get();
+    print("user id is ${_auth.currentUser!.uid}");
+    print("successfully got the user data");
+    print("the data is ${documentSnapshot.data()}");
     return model.User.fromSnap(documentSnapshot);
   }
 

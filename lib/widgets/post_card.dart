@@ -13,7 +13,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
 
-class PostCard extends StatefulWidget{
+class PostCard extends StatefulWidget {
   final snap;
   const PostCard({
     Key? key,
@@ -141,7 +141,6 @@ class _PostCardState extends State<PostCard> {
                                                   widget.snap['postId']
                                                       .toString(),
                                                 );
-                                                // remove the dialog box
                                                 Navigator.of(context).pop();
                                               }),
                                         )
@@ -150,7 +149,10 @@ class _PostCardState extends State<PostCard> {
                             },
                           );
                         },
-                        icon: const Icon(Icons.more_vert),
+                        icon: const Icon(
+                          Icons.more_vert,
+                          color: Colors.white,
+                        ),
                       )
                     : Container(),
               ],

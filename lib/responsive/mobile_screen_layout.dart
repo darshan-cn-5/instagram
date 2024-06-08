@@ -20,10 +20,8 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout>{
     pageController = PageController();
   }
 
-  
   @override
-  
-  void dispose(){
+  void dispose() {
     super.dispose();
     pageController.dispose();
   }
@@ -94,5 +92,4 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout>{
       ),
     );
   }
-
 }

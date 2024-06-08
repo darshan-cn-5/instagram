@@ -1,13 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram1/firebase_options.dart';
 import 'package:instagram1/providers/user_provider.dart';
-import 'package:instagram1/responsive/mobile_screen_layout.dart';
-import 'package:instagram1/responsive/responsive_layout.dart';
-import 'package:instagram1/responsive/web_screen_layout.dart';
 import 'package:instagram1/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 

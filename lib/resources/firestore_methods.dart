@@ -1,10 +1,7 @@
 // ignore_for_file: empty_catches, prefer_final_fields
 
-import "dart:typed_data";
-
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
 import "package:instagram1/models/post.dart";
 import "package:instagram1/resources/storage_methods.dart";
 import "package:uuid/uuid.dart";
@@ -97,8 +94,6 @@ class FireStoreMethods with ChangeNotifier {
     }
     return res;
   }
-
-
 
   Future<void> followUser(String uid, String followId) async {
     try {
