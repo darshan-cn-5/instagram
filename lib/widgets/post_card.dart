@@ -13,7 +13,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
 
-class PostCard extends StatefulWidget {
+class PostCard extends StatefulWidget{
   final snap;
   const PostCard({
     Key? key,
