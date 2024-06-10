@@ -56,27 +56,27 @@ class _CommentsScreenState extends State<CommentsScreen> {
         ),
         centerTitle: false,
       ),
-      // body: StreamBuilder(
-      //   stream: FirebaseFirestore.instance
-      //       .collection('posts')
-      //       .doc(widget.postId)
-      //       .collection('comments')
-      //       .snapshots(),
-      //   builder: (context,
-      //       AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot){
-      //     if (snapshot.connectionState == ConnectionState.waiting) {
-      //       return const Center(
-      //         child: CircularProgressIndicator(),
-      //       );
-      //     }
-      //     return ListView.builder(
-      //       itemCount: snapshot.data!.docs.length,
-      //       itemBuilder: (ctx, index) => CommentCard(
-      //         snap: snapshot.data!.docs[index],
-      //       ),
-      //     );
-      //   },
-      // ),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('posts')
+            .doc(widget.postId)
+            .collection('comments')
+            .snapshots(),
+        builder: (context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot){
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return ListView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (ctx, index) => CommentCard(
+              snap: snapshot.data!.docs[index],
+            ),
+          );
+        },
+      ),
 
 
 
