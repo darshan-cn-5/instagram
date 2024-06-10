@@ -55,7 +55,7 @@ class FireStoreMethods with ChangeNotifier {
     return res;
   }
 
-  Future<String> deletePost(String postId) async {
+  Future<String> deletePost(String postId) async{
     String res = "Some error occurred";
     try {
       await _firestore.collection('posts').doc(postId).delete();
