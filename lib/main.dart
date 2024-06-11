@@ -18,7 +18,7 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget{
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget{
         //         );
         //       }
         //     }
-        //     if (snapshot.connectionState == ConnectionState.waiting) {
+        //     if (snapshot.connectionState == ConnectionState.waiting){
         //       return const Center(
         //         child: CircularProgressIndicator(),
         //       );
@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget{
         //     return const LoginScreen();
         //   },
         // ),
+
         home: LoginScreen(),
       ),
     );
