@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-class TextFieldInput extends StatelessWidget {
+class TextFieldInput extends StatelessWidget{
   final TextEditingController textEditingController;
   final bool isPass;
   final String hintText;

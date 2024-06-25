@@ -5,7 +5,7 @@ import "package:flutter/material.dart";
 import "package:instagram1/utils/colors.dart";
 import "package:instagram1/utils/global_variable.dart";
 
-class MobileScreenLayout extends StatefulWidget {
+class MobileScreenLayout extends StatefulWidget{
   const MobileScreenLayout({super.key});
   @override
   State<MobileScreenLayout> createState() => _MobileScreenLayoutState();
@@ -15,30 +15,30 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout>{
   int _page = 0;
   late PageController pageController;
   @override
-  void initState() {
+  void initState(){
     super.initState();
     pageController = PageController();
   }
 
   @override
-  void dispose() {
+  void dispose(){
     super.dispose();
     pageController.dispose();
   }
 
-  void onPageChanged(int page) {
-    setState(() {
+  void onPageChanged(int page){
+    setState((){
       _page = page;
     });
   }
 
-  void navigationTapped(int page) {
-    //Animating Page
+  void navigationTapped(int page){
     pageController.jumpToPage(page);
   }
 
   @override
-  Widget build(BuildContext context) {
+
+  Widget build(BuildContext context){
     return Scaffold(
       body: PageView(
         controller: pageController,

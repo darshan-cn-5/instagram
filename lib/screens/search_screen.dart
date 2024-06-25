@@ -50,8 +50,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     isGreaterThanOrEqualTo: searchController.text,
                   )
                   .get(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
+              builder: (context, snapshot){
+                if (!snapshot.hasData){ 
                   return Center(
                     child: CircularProgressIndicator(),
                   );

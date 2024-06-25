@@ -9,12 +9,11 @@ import "package:flutter/material.dart";
 import "package:instagram1/models/user.dart" as model;
 import "package:instagram1/resources/storage_methods.dart";
 
-class AuthMethods{
-
+class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<model.User> getUserDetails() async{
+  Future<model.User> getUserDetails() async {
     User currentUser = _auth.currentUser!;
     print("came inside the function also to get the user details");
     DocumentSnapshot documentSnapshot =
@@ -23,6 +22,7 @@ class AuthMethods{
     print("successfully got the user data");
     print("the data is ${documentSnapshot.data()}");
     return model.User.fromSnap(documentSnapshot);
+
   }
 
   Future<String> signUpUser({

@@ -5,7 +5,7 @@ import 'package:instagram1/utils/colors.dart';
 import 'package:instagram1/utils/dimensions.dart';
 import 'package:instagram1/widgets/post_card.dart';
 
-class FeedScreen extends StatefulWidget {
+class FeedScreen extends StatefulWidget{
   const FeedScreen({Key? key}) : super(key: key);
 
   @override

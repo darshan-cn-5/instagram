@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram1/firebase_options.dart';
+import 'package:instagram1/providers/likd_users_provider.dart';
 import 'package:instagram1/providers/user_provider.dart';
 import 'package:instagram1/responsive/mobile_screen_layout.dart';
 import 'package:instagram1/responsive/responsive_layout.dart';
@@ -25,36 +26,35 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => LikedUsersProvider()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark(),
-        // home: StreamBuilder(
-        //   stream: FirebaseAuth.instance.authStateChanges(),
-        //   builder: (context, snapshot) {
-        //     if (snapshot.connectionState == ConnectionState.active) {
-        //       if (snapshot.hasData) {
-        //         return const ResponsiveLayout(
-        //           mobileScreenLayout: MobileScreenLayout(),
-        //           webScreenLayout: WebScreenLayout(),
-        //         );
-        //       } else if (snapshot.hasError) {
-        //         return Center(
-        //           child: Text('${snapshot.error}'),
-        //         );
-        //       }
-        //     }
-        //     if (snapshot.connectionState == ConnectionState.waiting){
-        //       return const Center(
-        //         child: CircularProgressIndicator(),
-        //       );
-        //     }
-        //     return const LoginScreen();
-        //   },
-        // ),
-
-        home: LoginScreen(),
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.active) {
+              if (snapshot.hasData) {
+                return const ResponsiveLayout(
+                  mobileScreenLayout: MobileScreenLayout(),
+                  webScreenLayout: WebScreenLayout(),
+                );
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text('${snapshot.error}'),
+                );
+              }
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return const LoginScreen();
+          },
+        ),
       ),
     );
   }

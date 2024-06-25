@@ -1,10 +1,11 @@
-// ignore_for_file: use_build_context_synchronously, prefer_typing_uninitialized_variables, use_super_parameters
+// ignore_for_file: use_build_context_synchronously, prefer_typing_uninitialized_variables, use_super_parameters, prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram1/models/user.dart' as model;
 import 'package:instagram1/resources/firestore_methods.dart';
 import 'package:instagram1/screens/commments_screen.dart';
+import 'package:instagram1/screens/liked_users_screen.dart';
 import 'package:instagram1/utils/colors.dart';
 import 'package:instagram1/utils/dimensions.dart';
 import 'package:instagram1/utils/utils.dart';
@@ -13,7 +14,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
 
-class PostCard extends StatefulWidget{
+class PostCard extends StatefulWidget {
   final snap;
   const PostCard({
     Key? key,
@@ -68,7 +69,6 @@ class _PostCardState extends State<PostCard> {
     final width = MediaQuery.of(context).size.width;
 
     return Container(
-      // boundary needed for web
       decoration: BoxDecoration(
         border: Border.all(
           color: width > webScreenSize ? secondaryColor : mobileBackgroundColor,
@@ -114,37 +114,38 @@ class _PostCardState extends State<PostCard> {
                 ),
                 widget.snap['uid'].toString() == user.uid
                     ? IconButton(
-                        onPressed: () {
+                        onPressed:(){
                           showDialog(
                             useRootNavigator: false,
                             context: context,
                             builder: (context) {
                               return Dialog(
                                 child: ListView(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16),
-                                    shrinkWrap: true,
-                                    children: [
-                                      'Delete',
-                                    ]
-                                        .map(
-                                          (e) => InkWell(
-                                              child: Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 12,
-                                                        horizontal: 16),
-                                                child: Text(e),
-                                              ),
-                                              onTap: () {
-                                                deletePost(
-                                                  widget.snap['postId']
-                                                      .toString(),
-                                                );
-                                                Navigator.of(context).pop();
-                                              }),
-                                        )
-                                        .toList()),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 16),
+                                  shrinkWrap: true,
+                                  children: [
+                                    'Delete',
+                                  ]
+                                      .map(
+                                        (e) => InkWell(
+                                            child: Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 12,
+                                                      horizontal: 16),
+                                              child: Text(e),
+                                            ),
+                                            onTap: () {
+                                              deletePost(
+                                                widget.snap['postId']
+                                                    .toString(),
+                                              );
+                                              Navigator.of(context).pop();
+                                            }),
+                                      )
+                                      .toList(),
+                                ),
                               );
                             },
                           );
@@ -251,7 +252,6 @@ class _PostCardState extends State<PostCard> {
               ))
             ],
           ),
-          //DESCRIPTION AND NUMBER OF COMMENTS
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -263,9 +263,21 @@ class _PostCardState extends State<PostCard> {
                         .textTheme
                         .titleSmall!
                         .copyWith(fontWeight: FontWeight.w800),
-                    child: Text(
-                      '${widget.snap['likes'].length} likes',
-                      style: Theme.of(context).textTheme.bodyMedium,
+                    child: GestureDetector(
+                      onTap: () {
+                        print(
+                            "type of lsit of user ids is ${widget.snap['likes'].runtimeType}");
+                        print("and the data is ${widget.snap['likes']}");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LikedUsersList(
+                                    listofuserids: widget.snap['likes'])));
+                      },
+                      child: Text(
+                        '${widget.snap['likes'].length} likes',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
                     )),
                 Container(
                   width: double.infinity,

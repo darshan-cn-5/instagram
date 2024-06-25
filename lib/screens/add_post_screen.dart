@@ -1,27 +1,26 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously, use_super_parameters, prefer_const_constructors, avoid_print
 
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:instagram1/providers/user_provider.dart';
 import 'package:instagram1/resources/firestore_methods.dart';
+import 'package:instagram1/providers/user_provider.dart';
 import 'package:instagram1/utils/colors.dart';
 import 'package:instagram1/utils/utils.dart';
 import 'package:provider/provider.dart';
 
-class AddPostScreen extends StatefulWidget {
+class AddPostScreen extends StatefulWidget{
   const AddPostScreen({Key? key}) : super(key: key);
   @override
   _AddPostScreenState createState() => _AddPostScreenState();
 }
 
-class _AddPostScreenState extends State<AddPostScreen> {
+class _AddPostScreenState extends State<AddPostScreen>{
   Uint8List? _file;
   bool isLoading = false;
   final TextEditingController _descriptionController = TextEditingController();
 
-  _selectImage(BuildContext parentContext) async {
+  _selectImage(BuildContext parentContext) async{
     return showDialog(
       context: parentContext,
       builder: (BuildContext context) {
@@ -61,8 +60,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
     );
   }
 
-  void postImage(String uid, String username, String profImage) async {
-    setState(() {
+  void postImage(String uid, String username, String profImage) async{
+    setState((){
       isLoading = true;
     });
     try {
@@ -100,14 +99,14 @@ class _AddPostScreenState extends State<AddPostScreen> {
     }
   }
 
-  void clearImage() {
+  void clearImage(){
     setState(() {
       _file = null;
     });
   }
 
   @override
-  void dispose() {
+  void dispose(){
     super.dispose();
     _descriptionController.dispose();
   }
