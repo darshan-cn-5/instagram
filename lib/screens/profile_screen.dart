@@ -3,10 +3,13 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
 import "package:instagram1/resources/auth_methods.dart";
 import "package:instagram1/resources/firestore_methods.dart";
 import "package:instagram1/screens/login_screen.dart";
+import "package:instagram1/screens/saved_posts.dart";
 import "package:instagram1/utils/colors.dart";
+import "package:instagram1/utils/text_style.dart";
 import "package:instagram1/utils/utils.dart";
 import "package:instagram1/widgets/follow_button.dart";
 
@@ -24,6 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int following = 0;
   bool isFollowing = false;
   bool isLoading = false;
+  List? savedPosts = [];
 
   @override
   void initState() {
@@ -53,6 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       isFollowing = userSnap
           .data()!['followers']
           .contains(FirebaseAuth.instance.currentUser!.uid);
+      savedPosts = userSnap.data()!['savedPostIds'];
       setState(() {});
     } catch (e) {
       showSnackBar(
@@ -78,6 +83,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 userData['username'],
               ),
               centerTitle: false,
+              actions: [
+                GestureDetector(
+                  child: Text(
+                    "saved \n posts",
+                    style: whiteSmallTextStyle,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SavedPosts(
+                                  savedPostsIds: savedPosts,
+                                )));
+                  },
+                )
+              ],
             ),
             body: ListView(
               children: [

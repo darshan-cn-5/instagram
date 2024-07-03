@@ -81,7 +81,8 @@ class Post {
       postId: json["postId"],
       datePublished: json["datePublished"],
       postUrl: json['postUrl'],
-      profImage: json['profImage']);
+      profImage: json['profImage'],
+      );
 
   Map<String, dynamic> toJson() => {
         "description": description,
@@ -91,7 +92,6 @@ class Post {
         "postId": postId,
         "datePublished": datePublished,
         'postUrl': postUrl,
-        'profImage': profImage
+        'profImage': profImage,
       };
-
 }

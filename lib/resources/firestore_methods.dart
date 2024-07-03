@@ -1,13 +1,15 @@
-// ignore_for_file: empty_catches, prefer_final_fields
+// ignore_for_file: empty_catches, prefer_final_fields, avoid_print
 
 import "package:cloud_firestore/cloud_firestore.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/foundation.dart";
 import "package:instagram1/models/post.dart";
 import "package:instagram1/resources/storage_methods.dart";
 import "package:uuid/uuid.dart";
 
-class FireStoreMethods with ChangeNotifier{
+class FireStoreMethods with ChangeNotifier {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
 
   Future<String> uploadPost(String description, Uint8List file, String uid,
       String username, String profImage) async {
@@ -33,8 +35,6 @@ class FireStoreMethods with ChangeNotifier{
     }
     return res;
   }
-
-
 
   Future<String> likePost(String postId, String uid, List likes) async {
     String res = "Some error occurred";
@@ -121,5 +121,21 @@ class FireStoreMethods with ChangeNotifier{
     } catch (e) {
       if (kDebugMode) print(e.toString());
     }
+  }
+
+  Future<void> savePost(
+    String postId,
+  ) async {
+    try {
+      await _firestore
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        "savedPostIds": FieldValue.arrayUnion([postId]),
+      });
+      print("successfully added the post id for the usersavedposts");
+    } catch (err) {
+      print("catch error occured while adding the postid for usersavedposts");
+    } finally {}
   }
 }

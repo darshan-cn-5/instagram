@@ -20,7 +20,6 @@ class PostCard extends StatefulWidget {
     Key? key,
     required this.snap,
   }) : super(key: key);
-
   @override
   State<PostCard> createState() => _PostCardState();
 }
@@ -32,6 +31,7 @@ class _PostCardState extends State<PostCard> {
   @override
   void initState() {
     super.initState();
+    
     fetchCommentLen();
   }
 
@@ -114,7 +114,7 @@ class _PostCardState extends State<PostCard> {
                 ),
                 widget.snap['uid'].toString() == user.uid
                     ? IconButton(
-                        onPressed:(){
+                        onPressed: () {
                           showDialog(
                             useRootNavigator: false,
                             context: context,
@@ -205,7 +205,6 @@ class _PostCardState extends State<PostCard> {
               ],
             ),
           ),
-          // LIKE, COMMENT SECTION OF THE POST
           Row(
             children: <Widget>[
               LikeAnimation(
@@ -239,16 +238,24 @@ class _PostCardState extends State<PostCard> {
                   ),
                 ),
               ),
-              IconButton(
-                  icon: const Icon(
-                    Icons.send,
-                  ),
-                  onPressed: () {}),
+              // IconButton(
+              //     icon: const Icon(
+              //       Icons.send,
+              //     ),
+              //     onPressed:(){
+              // }
+              // ),
               Expanded(
                   child: Align(
                 alignment: Alignment.bottomRight,
                 child: IconButton(
-                    icon: const Icon(Icons.bookmark_border), onPressed: () {}),
+                  icon:  Icon(Icons.bookmark_border),
+                  onPressed: () {
+                    print("post id is ${widget.snap['postId'].toString()}");
+                    FireStoreMethods()
+                        .savePost(widget.snap['postId'].toString());
+                  },
+                ),
               ))
             ],
           ),

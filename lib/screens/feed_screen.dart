@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,7 +7,7 @@ import 'package:instagram1/utils/colors.dart';
 import 'package:instagram1/utils/dimensions.dart';
 import 'package:instagram1/widgets/post_card.dart';
 
-class FeedScreen extends StatefulWidget{
+class FeedScreen extends StatefulWidget {
   const FeedScreen({Key? key}) : super(key: key);
 
   @override

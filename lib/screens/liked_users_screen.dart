@@ -30,12 +30,12 @@ class _LikedUsersListState extends State<LikedUsersList> {
 
   Widget build(BuildContext context) {
     return Consumer<LikedUsersProvider>(
-        builder: (context, likedusersprovider, child) {
+        builder: (context, likedusersprovider, child){
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black.withOpacity(0.5),
           leading: IconButton(
-              onPressed: () {
+              onPressed:(){
                 Navigator.pop(context);
               },
               icon: Icon(
@@ -50,10 +50,6 @@ class _LikedUsersListState extends State<LikedUsersList> {
         ),
         body: Column(
           children: [
-            Divider(
-              color: Colors.grey,
-              thickness: 0.4,
-            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Row(

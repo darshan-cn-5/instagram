@@ -21,7 +21,6 @@ class CommentsScreen extends StatefulWidget {
 class _CommentsScreenState extends State<CommentsScreen> {
   final TextEditingController commentEditingController =
       TextEditingController();
-
   void postComment(String uid, String name, String profilePic) async {
     try {
       String res = await FireStoreMethods().postComment(
@@ -65,8 +64,8 @@ class _CommentsScreenState extends State<CommentsScreen> {
             .collection('comments')
             .snapshots(),
         builder: (context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot){
+          if (snapshot.connectionState == ConnectionState.waiting){
             return const Center(
               child: CircularProgressIndicator(),
             );

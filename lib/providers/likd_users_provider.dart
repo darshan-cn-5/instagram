@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram1/models/user.dart' as model;
 
-class LikedUsersProvider extends ChangeNotifier {
+class LikedUsersProvider extends ChangeNotifier{
   List<model.User> likedUsers = [];
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -14,10 +14,9 @@ class LikedUsersProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchLikedUsersProfiles(List<dynamic> likedUserIds) async {
+  Future<void> fetchLikedUsersProfiles(List<dynamic> likedUserIds) async{
     isLoading = true;
     notifyListeners();
-
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     for (String userId in likedUserIds) {
@@ -25,8 +24,7 @@ class LikedUsersProvider extends ChangeNotifier {
         DocumentSnapshot userProfile =
             await firestore.collection('users').doc(userId).get();
         model.User user = model.User.fromSnap(userProfile);
-
-        if (!likedUsers.any((existingUser) => existingUser.uid == user.uid)) {
+        if (!likedUsers.any((existingUser) => existingUser.uid == user.uid)){
           likedUsers.add(user);
         }
       } catch (e) {

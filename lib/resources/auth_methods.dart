@@ -22,7 +22,6 @@ class AuthMethods {
     print("successfully got the user data");
     print("the data is ${documentSnapshot.data()}");
     return model.User.fromSnap(documentSnapshot);
-
   }
 
   Future<String> signUpUser({
@@ -53,6 +52,7 @@ class AuthMethods {
           bio: bio,
           followers: [],
           following: [],
+          savedPostIds: [],
         );
         await _firestore
             .collection("users")

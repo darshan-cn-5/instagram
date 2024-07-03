@@ -20,6 +20,12 @@ TextStyle whiteTextStyle = TextStyle(
   fontWeight: FontWeight.w700,
 );
 
+TextStyle whiteSmallTextStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 14,
+  fontWeight: FontWeight.w500,
+);
+
 TextStyle whiteHeadingTextStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.w700,
