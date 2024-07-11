@@ -3,9 +3,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram1/providers/user_provider.dart';
 import 'package:instagram1/utils/colors.dart';
 import 'package:instagram1/utils/dimensions.dart';
 import 'package:instagram1/widgets/post_card.dart';
+import 'package:provider/provider.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({Key? key}) : super(key: key);
@@ -15,8 +17,14 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreenState extends State<FeedScreen> {
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+  }
+
+
+  Widget build(BuildContext context){
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(

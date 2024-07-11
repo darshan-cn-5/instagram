@@ -13,10 +13,22 @@ class SavedPosts extends StatefulWidget {
 }
 
 class _SavedPostsState extends State<SavedPosts> {
+  late Future<List<DocumentSnapshot<Map<String, dynamic>>>> _postsFuture;
   @override
   void initState() {
     super.initState();
     print("The saved post IDs we got are: ${widget.savedPostsIds}");
+    _postsFuture = _fetchSavedPosts();
+  }
+
+  Future<List<DocumentSnapshot<Map<String, dynamic>>>>
+      _fetchSavedPosts() async {
+    if (widget.savedPostsIds == null || widget.savedPostsIds!.isEmpty) {
+      return [];
+    }
+    return Future.wait(widget.savedPostsIds!.map((postId) {
+      return FirebaseFirestore.instance.collection('posts').doc(postId).get();
+    }));
   }
 
   Widget build(BuildContext context) {
@@ -41,45 +53,49 @@ class _SavedPostsState extends State<SavedPosts> {
         ),
         centerTitle: true,
       ),
-      body: widget.savedPostsIds == null || widget.savedPostsIds!.isEmpty
-          ? Center(
+      body: FutureBuilder<List<DocumentSnapshot<Map<String, dynamic>>>>(
+        future: _postsFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (snapshot.hasError) {
+            return Center(
+              child: Text("Error loading posts"),
+            );
+          }
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(
               child: Text(
                 "No saved posts",
                 style: TextStyle(fontSize: 18),
               ),
-            )
-          : ListView.builder(
-              itemCount: widget.savedPostsIds!.length,
-              itemBuilder: (ctx, index) {
-                String postId = widget.savedPostsIds![index];
-                return FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                  future: FirebaseFirestore.instance
-                      .collection('posts')
-                      .doc(postId)
-                      .get(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    if (!snapshot.hasData || !snapshot.data!.exists) {
-                      return Container();
-                    }
-                    var postData = snapshot.data!.data();
-                    return Container(
-                      margin: EdgeInsets.symmetric(
-                        horizontal: width > webScreenSize ? width * 0.3 : 0,
-                        vertical: width > webScreenSize ? 15 : 0,
-                      ),
-                      child: PostCard(
-                        snap: postData!,
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
+            );
+          }
+
+          var posts = snapshot.data!;
+          return ListView.builder(
+            itemCount: posts.length,
+            itemBuilder: (ctx, index) {
+              var postData = posts[index].data();
+              if (postData == null) {
+                return Container();
+              }
+              return Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: width > webScreenSize ? width * 0.3 : 0,
+                  vertical: width > webScreenSize ? 15 : 0,
+                ),
+                child: PostCard(
+                  snap: postData,
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

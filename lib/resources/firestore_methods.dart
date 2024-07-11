@@ -7,7 +7,7 @@ import "package:instagram1/models/post.dart";
 import "package:instagram1/resources/storage_methods.dart";
 import "package:uuid/uuid.dart";
 
-class FireStoreMethods with ChangeNotifier {
+class FireStoreMethods with ChangeNotifier{
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 
@@ -22,7 +22,9 @@ class FireStoreMethods with ChangeNotifier {
         description: description,
         uid: uid,
         username: username,
-        likes: [],
+        likes : [
+
+        ],
         postId: postId,
         datePublished: DateTime.now(),
         postUrl: photoUrl,
@@ -136,6 +138,23 @@ class FireStoreMethods with ChangeNotifier {
       print("successfully added the post id for the usersavedposts");
     } catch (err) {
       print("catch error occured while adding the postid for usersavedposts");
+    } finally {}
+  }
+
+
+   Future<void> removePost(
+    String postId,
+  ) async {
+    try {
+      await _firestore
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        "savedPostIds": FieldValue.arrayRemove([postId]),
+      });
+      print("successfully removed  the post id for the usersavedposts");
+    } catch (err) {
+      print("catch error occured while removing  the postid for usersavedposts");
     } finally {}
   }
 }
